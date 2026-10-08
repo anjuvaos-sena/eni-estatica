@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENI · Escuela Nacional de Instructores | SENA</title>
+  <!-- Bootstrap 5 (CSS) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Google Fonts (opcional) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+  <style>
+    /* Estilos personalizados para la landing ENI */
+    :root {
+      --sena-green: #2e7d32;
+      --sena-green-dark: #1b5e20;
+      --sena-green-light: #a5d6a7;
+      --sena-yellow: #ffb300;
+      --sena-blue: #0d47a1;
+    }
+    * {
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    }
+    body {
+      background-color: #f8fafc;
+      overflow-x: hidden;
+    }
+
+    /* Hero con gradiente y patrón */
+    .hero-section {
+      background: linear-gradient(135deg, #0b3b0e 0%, #1b5e20 60%, #2e7d32 100%);
+      position: relative;
+      padding: 5rem 0 4rem;
+      border-bottom: 6px solid var(--sena-yellow);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .hero-section::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.08"><path d="M20 30 L35 15 L50 30 L65 15 L80 30 L65 45 L50 60 L35 45 L20 30 Z" fill="white"/><circle cx="75" cy="70" r="8" fill="white"/><circle cx="25" cy="75" r="12" fill="white"/></svg>');
+      background-size: 180px 180px;
+      background-repeat: repeat;
+      pointer-events: none;
+    }
+    .hero-section .container {
+      position: relative;
+      z-index: 2;
+    }
+    .hero-title {
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+    }
+    .hero-subtitle {
+      font-weight: 400;
+      opacity: 0.95;
+      max-width: 700px;
+    }
+    .badge-eni {
+      background-color: var(--sena-yellow);
+      color: #1f2a1e;
+      font-weight: 600;
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      letter-spacing: 0.3px;
+      display: inline-block;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    /* Tarjetas misión */
+    .card-mision {
+      border: none;
+      border-radius: 24px;
+      background: white;
+      box-shadow: 0 10px 30px rgba(0, 40, 0, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      overflow: hidden;
+      height: 100%;
+    }
+    .card-mision:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 35px rgba(46, 125, 50, 0.15);
+    }
+    .icon-circle {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(145deg, var(--sena-green-light), #e8f5e9);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sena-green-dark);
+      font-size: 2.2rem;
+    }
+
+    /* Oportunidades / capacitación */
+    .oportunidad-card {
+      border: none;
+      border-radius: 20px;
+      background: white;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+      transition: all 0.2s;
+      height: 100%;
+      border-left: 6px solid var(--sena-green);
+    }
+    .oportunidad-card:hover {
+      background: #f1f9f0;
+      border-left-color: var(--sena-yellow);
+      box-shadow: 0 12px 24px rgba(46, 125, 50, 0.12);
+    }
+    .oportunidad-card .card-body {
+      padding: 1.8rem 1.5rem;
+    }
+    .badge-capacitacion {
+      background-color: #e8f5e9;
+      color: #1b5e20;
+      font-weight: 600;
+      padding: 0.35rem 1rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      letter-spacing: 0.3px;
+    }
+
+    /* Sección llamada a la acción */
+    .cta-section {
+      background: linear-gradient(120deg, #1b5e20, #2e7d32);
+      border-radius: 40px;
+      padding: 3.5rem 2rem;
+      color: white;
+      box-shadow: 0 20px 35px -5px rgba(27, 94, 32, 0.3);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .btn-sena {
+      background-color: var(--sena-yellow);
+      color: #1f2a1e;
+      font-weight: 700;
+      padding: 0.9rem 2.2rem;
+      border-radius: 60px;
+      border: none;
+      transition: all 0.2s;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    }
+    .btn-sena:hover {
+      background-color: #ffa000;
+      color: #0a1f0a;
+      transform: scale(1.02);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.2);
+    }
+    .btn-outline-light-custom {
+      border: 2px solid rgba(255,255,255,0.7);
+      color: white;
+      font-weight: 600;
+      padding: 0.9rem 2rem;
+      border-radius: 60px;
+      background: transparent;
+      transition: all 0.2s;
+    }
+    .btn-outline-light-custom:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: white;
+      color: white;
+    }
+
+    /* footer */
+    .footer {
+      background-color: #0f1a0f;
+      color: #b0c4b0;
+      padding: 2rem 0;
+      border-top: 4px solid var(--sena-yellow);
+      font-size: 0.9rem;
+    }
+    .footer i {
+      color: var(--sena-yellow);
+      margin-right: 6px;
+    }
+
+    /* Ajustes responsivos */
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 3rem 0 2.5rem;
+        text-align: center;
+      }
+      .hero-title {
+        font-size: 2.2rem;
+      }
+      .badge-eni {
+        font-size: 0.8rem;
+      }
+      .cta-section {
+        padding: 2.5rem 1.2rem;
+      }
+      .icon-circle {
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+      }
+    }
+    @media (max-width: 576px) {
+      .hero-title {
+        font-size: 1.9rem;
+      }
+      .btn-sena, .btn-outline-light-custom {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+    /* animación sutil */
+    .fade-up {
+      animation: fadeUp 0.6s ease forwards;
+      opacity: 0;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+  </style>
+</head>
+<body>
+
+  <!-- HERO / CABECERA -->
+  <header class="hero-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-8 mx-auto text-center text-lg-start">
+          <span class="badge-eni mb-3 fade-up">
+            <i class="bi bi-mortarboard-fill me-2"></i>Escuela Nacional de Instructores · SENA
+          </span>
+          <h1 class="hero-title display-4 fw-bold text-white mb-3 fade-up delay-1">
+            Formamos a quienes <span style="color: #ffb300;">transforman vidas</span>
+          </h1>
+          <p class="hero-subtitle lead text-white-50 mb-4 fade-up delay-2">
+            La ENI impulsa el desarrollo profesional de los instructores SENA con programas 
+            de alta calidad, innovación pedagógica y excelencia técnica.
+          </p>
+          <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start fade-up delay-3">
+            <a href="#oportunidades" class="btn btn-sena btn-lg">
+              <i class="bi bi-arrow-down-circle me-2"></i>Ver oportunidades
+            </a>
+            <a href="#mision" class="btn btn-outline-light-custom btn-lg">
+              <i class="bi bi-info-circle me-2"></i>Nuestra misión
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-4 d-none d-lg-flex justify-content-center">
+          <!-- Ícono decorativo / ilustración -->
+          <div class="bg-white bg-opacity-10 p-5 rounded-circle">
+            <i class="bi bi-building display-1 text-white"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MISIÓN -->
+  <section id="mision" class="py-5 my-4">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="display-5 fw-bold" style="color: #1b5e20;">Nuestra misión</h2>
+        <div style="width: 80px; height: 5px; background: #ffb300; margin: 1rem auto 0; border-radius: 10px;"></div>
+        <p class="lead text-muted mt-3 mx-auto" style="max-width: 700px;">
+          Fortalecer las competencias pedagógicas, técnicas y humanas de los instructores del SENA,
+          contribuyendo a la formación integral de aprendices y al desarrollo social y productivo del país.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Card 1 -->
+        <div class="col-md-4">
+          <div class="card-mision p-4">
+            <div class="icon-circle mb-4">
+              <i class="bi bi-lightbulb"></i>
+            </div>
+            <h4 class="fw-semibold mb-2">Innovación pedagógica</h4>
+            <p class="text-secondary mb-0">
+              Promovemos metodologías activas, aprendizaje basado en proyectos y el uso de 
+              tecnologías emergentes en el aula.
+            </p>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="col-md-4">
+          <div class="card-mision p-4">
+            <div class="icon-circle mb-4">
+              <i class="bi bi-people"></i>
+            </div>
+            <h4 class="fw-semibold mb-2">Excelencia docente</h4>
+            <p class="text-secondary mb-0">
+              Acompañamos la cualificación continua de los instructores para asegurar 
+              procesos formativos pertinentes y de calidad.
+            </p>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="col-md-4">
+          <div class="card-mision p-4">
+            <div class="icon-circle mb-4">
+              <i class="bi bi-globe2"></i>
+            </div>
+            <h4 class="fw-semibold mb-2">Impacto social</h4>
+            <p class="text-secondary mb-0">
+              Contribuimos al cierre de brechas y a la empleabilidad, formando instructores 
+              comprometidos con el desarrollo regional y nacional.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPORTUNIDADES DE CAPACITACIÓN -->
+  <section id="oportunidades" class="py-5" style="background: #ffffff;">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="display-5 fw-bold" style="color: #1b5e20;">Oportunidades de capacitación</h2>
+        <div style="width: 80px; height: 5px; background: #ffb300; margin: 1rem auto 0; border-radius: 10px;"></div>
+        <p class="lead text-muted mt-3 mx-auto" style="max-width: 700px;">
+          Programas, cursos y rutas formativas diseñadas exclusivamente para instructores SENA.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Oportunidad 1 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="oportunidad-card card h-100">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <span class="badge-capacitacion"><i class="bi bi-star-fill me-1"></i>Pedagogía</span>
+                <i class="bi bi-pencil-square fs-3" style="color: #2e7d32;"></i>
+              </div>
+              <h5 class="card-title fw-bold">Diplomado en Docencia para la Formación Profesional</h5>
+              <p class="card-text text-secondary small mt-2">
+                Actualiza tus estrategias didácticas, evaluación por competencias y diseño curricular.
+              </p>
+              <div class="mt-3 d-flex align-items-center text-muted small">
+                <i class="bi bi-calendar-check me-2"></i> Inicio: 15 de mayo
+                <span class="mx-2">•</span>
+                <i class="bi bi-clock me-1"></i> 120 h
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Oportunidad 2 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="oportunidad-card card h-100">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <span class="badge-capacitacion"><i class="bi bi-cpu me-1"></i>Digital</span>
+                <i class="bi bi-laptop fs-3" style="color: #2e7d32;"></i>
+              </div>
+              <h5 class="card-title fw-bold">TIC e Innovación Educativa</h5>
+              <p class="card-text text-secondary small mt-2">
+                Herramientas digitales, IA generativa, aulas virtuales y recursos educativos abiertos.
+              </p>
+              <div class="mt-3 d-flex align-items-center text-muted small">
+                <i class="bi bi-calendar-check me-2"></i> Inicio: 3 de junio
+                <span class="mx-2">•</span>
+                <i class="bi bi-clock me-1"></i> 80 h
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Oportunidad 3 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="oportunidad-card card h-100">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <span class="badge-capacitacion"><i class="bi bi-chat-dots me-1"></i>Habilidades</span>
+                <i class="bi bi-mic fs-3" style="color: #2e7d32;"></i>
+              </div>
+              <h5 class="card-title fw-bold">Comunicación y Liderazgo para Instructores</h5>
+              <p class="card-text text-secondary small mt-2">
+                Fortalece tu comunicación asertiva, trabajo en equipo y liderazgo pedagógico.
+              </p>
+              <div class="mt-3 d-flex align-items-center text-muted small">
+                <i class="bi bi-calendar-check me-2"></i> Inicio: 20 de mayo
+                <span class="mx-2">•</span>
+                <i class="bi bi-clock me-1"></i> 60 h
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Oportunidad 4 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="oportunidad-card card h-100">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <span class="badge-capacitacion"><i class="bi bi-bar-chart me-1"></i>Evaluación</span>
+                <i class="bi bi-check2-circle fs-3" style="color: #2e7d32;"></i>
+              </div>
+              <h5 class="card-title fw-bold">Evaluación del Aprendizaje por Competencias</h5>
+              <p class="card-text text-secondary small mt-2">
+                Diseña instrumentos de evaluación válidos y confiables, con retroalimentación efectiva.
+              </p>
+              <div class="mt-3 d-flex align-items-center text-muted small">
+                <i class="bi bi-calendar-check me-2"></i> Inicio: 10 de junio
+                <span class="mx-2">•</span>
+                <i class="bi bi-clock me-1"></i> 90 h
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Oportunidad 5 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="oportunidad-card card h-100">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <span class="badge-capacitacion"><i class="bi bi-translate me-1"></i>Idiomas</span>
+                <i class="bi bi-translate fs-3" style="color: #2e7d32;"></i>
+              </div>
+              <h5 class="card-title fw-bold">Inglés Técnico para Instructores</h5>
+              <p class="card-text text-secondary small mt-2">
+                Desarrolla habilidades comunicativas en inglés aplicadas a contextos técnicos y pedagógicos.
+              </p>
+              <div class="mt-3 d-flex align-items-center text-muted small">
+                <i class="bi bi-calendar-check me-2"></i> Inicio: 1 de julio
+                <span class="mx-2">•</span>
+                <i class="bi bi-clock me-1"></i> 100 h
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Oportunidad 6 (Ruta de formación) -->
+        <div class="col-md-6 col-lg-4">
+          <div class="oportunidad-card card h-100">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <span class="badge-capacitacion"><i class="bi bi-award me-1"></i>Ruta ENI</span>
+                <i class="bi bi-trophy fs-3" style="color: #2e7d32;"></i>
+              </div>
+              <h5 class="card-title fw-bold">Ruta de Formación de Instructores líderes</h5>
+              <p class="card-text text-secondary small mt-2">
+                Programa integral para instructores que desean liderar procesos de transformación educativa.
+              </p>
+              <div class="mt-3 d-flex align-items-center text-muted small">
+                <i class="bi bi-calendar-check me-2"></i> Inicio: 5 de agosto
+                <span class="mx-2">•</span>
+                <i class="bi bi-clock me-1"></i> 200 h
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nota adicional -->
+      <div class="text-center mt-5">
+        <p class="text-muted">
+          <i class="bi bi-info-circle me-1"></i> 
+          Los instructores SENA pueden postularse a través de la plataforma institucional.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="py-5">
+    <div class="container">
+      <div class="cta-section text-center">
+        <h2 class="fw-bold mb-3 display-6">¿Listo para dar el siguiente paso?</h2>
+        <p class="lead mb-4 opacity-75 mx-auto" style="max-width: 600px;">
+          Inscríbete en nuestros programas y sé parte de la comunidad de instructores que 
+          transforman la formación profesional en Colombia.
+        </p>
+        <div class="d-flex flex-wrap gap-3 justify-content-center">
+          <a href="#" class="btn btn-sena btn-lg px-5">
+            <i class="bi bi-pencil-square me-2"></i>Inscríbete ahora
+          </a>
+          <a href="#" class="btn btn-outline-light-custom btn-lg px-5">
+            <i class="bi bi-download me-2"></i>Descargar portafolio
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row gy-4 align-items-center">
+        <div class="col-md-6 text-center text-md-start">
+          <h5 class="fw-bold text-white mb-2">
+            <i class="bi bi-mortarboard-fill me-2"></i>ENI · SENA
+          </h5>
+          <p class="mb-0 small">
+            Escuela Nacional de Instructores – Servicio Nacional de Aprendizaje.
+          </p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <p class="mb-1 small">
+            <i class="bi bi-geo-alt-fill"></i> Sede central: Calle 57 No. 8-00, Bogotá D.C.
+          </p>
+          <p class="mb-0 small">
+            <i class="bi bi-envelope-fill"></i> eni@sena.edu.co · 
+            <i class="bi bi-telephone-fill ms-2"></i> (601) 546 1500
+          </p>
+        </div>
+      </div>
+      <hr class="mt-4 border-secondary opacity-25">
+      <div class="text-center small opacity-75">
+        &copy; 2025 Escuela Nacional de Instructores – SENA. Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS (opcional para interactividad, aunque no es imprescindible) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- JavaScript personalizado (mínimo) -->
+  <script>
+    (function() {
+      // Smooth scroll para enlaces internos
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+          if (href === "#" || href === "") return;
+          const target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+
+      // Pequeño efecto de aparición para las tarjetas (opcional)
+      const cards = document.querySelectorAll('.card-mision, .oportunidad-card');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = 1;
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, { threshold: 0.1 });
+
+      cards.forEach(card => {
+        card.style.opacity = 0;
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(card);
+      });
+    })();
+  </script>
+</body>
+</html>
